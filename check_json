@@ -122,7 +122,7 @@ def check_threshold(options, j):
             and float(j[options.field_name]) >= float(options.warn_field_value):
         exit(nagios.warning, "%s >= %s" % (j[options.field_name], options.warn_field_value))
     else:
-        exit(nagios.OK, "%s < %s" % (j[options.field_name], options.warn_field_value))
+        exit(nagios.ok, "%s < %s" % (j[options.field_name], options.warn_field_value))
 
 """
 A timestamp age checker.  Similar to the threshold checker, but wraps
