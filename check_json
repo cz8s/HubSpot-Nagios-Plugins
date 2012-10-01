@@ -64,7 +64,6 @@ def exit(status, message):
 A simple string matcher, falls through from crit -> warn -> ok -> unknown
 """
 def check_string(options, j):
-    print "Checking string..."
     if options.crit_field_value is not None and j[options.field_name] == options.crit_field_value:
         exit(nagios.critical, "%s == %s" % (j[options.field_name], options.crit_field_value))
     elif options.warn_field_value is not None and j[options.field_name] == options.warn_field_value:
@@ -79,7 +78,6 @@ check or the returned value is not a boolean.  Otherwise, returns ok
 or critical, no warn mode.
 """
 def check_boolean(options, j):
-    print "Checking boolean..."
     if options.ok_field_value is None:
         exit(nagios.unknown,  "No value to check against for %s." % options.field_name)
     if str(options.ok_field_value).strip().lower() not in ["false","true"]:
@@ -112,7 +110,6 @@ def check_threshold(options, j):
     if float(options.crit_field_value) < float(options.warn_field_value):
         exit(nagios.unknown, "Critical threshold is less than warning threshold, can't compare properly.")
 
-    print "Checking threshold..."
     if options.crit_field_value is not None \
             and options.crit_field_value.isdigit() \
             and float(j[options.field_name]) >= float(options.crit_field_value):
@@ -131,7 +128,6 @@ epoch. Same cascading as threshold, fall through from crit -> warn ->
 ok or unkown if something isn't a number.
 """
 def check_timestamp(options, j):
-    print "Checking threshold..."
     current_ts = time.time()
     if not str(j[options.field_name]).isdigit() or float(j[options.field_name]) < 0:
         exit(nagios.unknown, "Field '%s' has non-timestamp value '%s'" % (options.field_name, j[options.field_name]))
