@@ -116,13 +116,13 @@ def check_threshold(options, j):
     if options.crit_field_value is not None \
             and options.crit_field_value.isdigit() \
             and float(j[options.field_name]) >= float(options.crit_field_value):
-        exit(nagios.critical, "%s >= %s" % (j[options.field_name], options.crit_field_value))
+        exit(nagios.critical, "%s >= %s | %s=%s" % (j[options.field_name], options.crit_field_value,options.field_name,j[options.field_name]))
     elif options.warn_field_value is not None \
             and options.warn_field_value.isdigit() \
             and float(j[options.field_name]) >= float(options.warn_field_value):
-        exit(nagios.warning, "%s >= %s" % (j[options.field_name], options.warn_field_value))
+        exit(nagios.warning, "%s >= %s | %s=%s" % (j[options.field_name], options.warn_field_value,options.field_name,j[options.field_name]))
     else:
-        exit(nagios.ok, "%s < %s" % (j[options.field_name], options.warn_field_value))
+        exit(nagios.ok, "%s < %s | %s=%s" % (j[options.field_name], options.warn_field_value,options.field_name,j[options.field_name]))
 
 """
 A timestamp age checker.  Similar to the threshold checker, but wraps
