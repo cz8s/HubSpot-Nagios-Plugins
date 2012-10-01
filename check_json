@@ -261,7 +261,6 @@ try:
 	request = urllib2.Request(uri)
 	if options.auth_string is not None:
 		base64string = base64.encodestring(options.auth_string).replace('\n','')
-		print "using auth %s" % base64string 
 		request.add_header("Authorization","Basic %s" % base64string)
         j = simplejson.load(urllib2.urlopen(request))
     except urllib2.HTTPError, ex:
